@@ -45,30 +45,7 @@
     @media(max-width: 768px) { .gallery-grid { grid-template-columns: 1fr; } }
 
 
-    /* Show grid by default */
-.desktop-only { display: block; }
-.mobile-only { display: none; }
 
-/* Mobile carousel styles */
-.gallery-carousel {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-}
-.gallery-carousel img {
-  flex: 0 0 100%;
-  border-radius: 8px;
-  object-fit: cover;
-  scroll-snap-align: start;
-}
-
-/* On mobile: hide grid, show carousel */
-@media(max-width: 768px) {
-  .desktop-only { display: none; }
-  .mobile-only { display: flex; }
-}
 
 
     /* Product info */
@@ -158,19 +135,6 @@
 <section>
   <!-- Desktop Grid -->
   <div class="gallery-grid desktop-only">
-    <img src="./IMG20250814142635.jpg" alt="Front View"/>
-    <img src="./IMG20250814142746.jpg" alt="Close-Up"/>
-    <img src="./IMG20250814142754.jpg" alt="Full View"/>
-    <img src="./IMG20250814142801 (1).jpg" alt="Side View"/>
-    <img src="./IMG20250814142801.jpg" alt="With Dupatta"/>
-    <img src="./IMG20250814142819.jpg" alt="Back View"/>
-    <img src="./IMG20250814142856.jpg" alt="Side View"/>
-    <img src="./IMG20250814142856.jpg" alt="With Dupatta"/>
-    <img src="./IMG20250814142932.jpg" alt="Back View"/>
-  </div>
-
-  <!-- Mobile Carousel -->
-  <div class="gallery-carousel mobile-only">
     <img src="./IMG20250814142635.jpg" alt="Front View"/>
     <img src="./IMG20250814142746.jpg" alt="Close-Up"/>
     <img src="./IMG20250814142754.jpg" alt="Full View"/>
