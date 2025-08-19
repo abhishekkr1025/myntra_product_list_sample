@@ -39,14 +39,37 @@
     .main-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; }
     @media(max-width: 980px) { .main-grid { grid-template-columns: 1fr; } }
 
-    /* Gallery grid */
-    .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .gallery-grid img { width: 100%; height: auto; border-radius: 8px; object-fit: cover; }
-    @media(max-width: 768px) { .gallery-grid { grid-template-columns: 1fr; } }
+    /* ===================== */
+    /*   GALLERY (Desktop)   */
+    /* ===================== */
+    .gallery-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+    .gallery-grid img { width: 100%; height: auto; border-radius: 8px; object-fit: contain; background: #fafafa; }
 
-
-
-
+    /* ================================== */
+    /*   GALLERY (Mobile Carousel only)   */
+    /* ================================== */
+    .desktop-only { display: block; }
+    .mobile-only { display: none; }
+    @media (max-width: 768px) {
+      .desktop-only { display: none !important; }
+      .mobile-only { 
+        display: grid;                 /* use grid for clean column snapping */
+        grid-auto-flow: column;        /* horizontal flow */
+        grid-auto-columns: 100%;       /* each slide takes full viewport width */
+        gap: 8px;
+        overflow-x: auto;              /* horizontal scroll */
+        scroll-snap-type: x mandatory; /* snap on slides */
+        -webkit-overflow-scrolling: touch; /* smooth iOS scroll */
+      }
+      .mobile-only img {
+        width: 100%;
+        height: auto;                  /* natural height so no zoom */
+        border-radius: 8px;
+        object-fit: contain;           /* avoid cropping/zooming */
+        scroll-snap-align: start;
+        background: #fafafa;
+      }
+    }
 
     /* Product info */
     .title { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
@@ -77,28 +100,14 @@
     .pincode input { padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; width: 160px; }
     .pincode button { padding: 10px 14px; border: none; background: var(--brand); color: #fff; border-radius: 8px; cursor: pointer; }
 
-    /* Accordion details */
-    .accordion { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-    .acc-item + .acc-item { border-top: 1px solid var(--border); }
-    .acc-head { padding: 14px 16px; background: #f9fafb; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-    .acc-body { padding: 0 16px 14px; display: none; background: #fff; font-size: 14px; line-height: 1.5; }
-    .acc-body.open { display: block; }
-
-
+    /* Product details */
     .product-details { margin-top: 24px; }
-.product-details h2 { font-size: 18px; font-weight: 600; margin-bottom: 12px; }
-.product-details h3 { font-size: 15px; font-weight: 600; margin-top: 16px; margin-bottom: 6px; }
-.product-details p { font-size: 14px; margin-bottom: 6px; }
-.product-details ul { margin-left: 16px; margin-bottom: 8px; font-size: 14px; line-height: 1.6; }
-.spec-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  margin-top: 10px;
-  font-size: 14px;
-}
-.spec-grid div { border-bottom: 1px solid #e5e7eb; padding-bottom: 6px; }
-
+    .product-details h2 { font-size: 18px; font-weight: 600; margin-bottom: 12px; }
+    .product-details h3 { font-size: 15px; font-weight: 600; margin-top: 16px; margin-bottom: 6px; }
+    .product-details p { font-size: 14px; margin-bottom: 6px; }
+    .product-details ul { margin-left: 16px; margin-bottom: 8px; font-size: 14px; line-height: 1.6; }
+    .spec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 10px; font-size: 14px; }
+    .spec-grid div { border-bottom: 1px solid #e5e7eb; padding-bottom: 6px; }
 
     /* Footer */
     footer { margin-top: 40px; padding: 20px 0; border-top: 1px solid var(--border); font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; flex-wrap: wrap; }
@@ -130,23 +139,34 @@
     </nav>
 
     <div class="main-grid">
-      <!-- Left: Image grid -->
-<!-- Left: Image grid -->
-<section>
-  <!-- Desktop Grid -->
-  <div class="gallery-grid desktop-only">
-    <img src="./IMG20250814142635.jpg" alt="Front View"/>
-    <img src="./IMG20250814142746.jpg" alt="Close-Up"/>
-    <img src="./IMG20250814142754.jpg" alt="Full View"/>
-    <img src="./IMG20250814142801 (1).jpg" alt="Side View"/>
-    <img src="./IMG20250814142801.jpg" alt="With Dupatta"/>
-    <img src="./IMG20250814142819.jpg" alt="Back View"/>
-    <img src="./IMG20250814142856.jpg" alt="Side View"/>
-    <img src="./IMG20250814142856.jpg" alt="With Dupatta"/>
-    <img src="./IMG20250814142932.jpg" alt="Back View"/>
-  </div>
-</section>
+      <!-- Left: Gallery -->
+      <section>
+        <!-- Desktop Grid -->
+        <div class="gallery-grid desktop-only">
+          <img src="./IMG20250814142635.jpg" alt="Front View"/>
+          <img src="./IMG20250814142746.jpg" alt="Close-Up"/>
+          <img src="./IMG20250814142754.jpg" alt="Full View"/>
+          <img src="./IMG20250814142801 (1).jpg" alt="Side View"/>
+          <img src="./IMG20250814142801.jpg" alt="With Dupatta"/>
+          <img src="./IMG20250814142819.jpg" alt="Back View"/>
+          <img src="./IMG20250814142856.jpg" alt="Side View"/>
+          <img src="./IMG20250814142856.jpg" alt="With Dupatta"/>
+          <img src="./IMG20250814142932.jpg" alt="Back View"/>
+        </div>
 
+        <!-- Mobile Carousel -->
+        <div class="gallery-carousel mobile-only" aria-label="Product images - swipe to view more">
+          <img src="./IMG20250814142635.jpg" alt="Front View"/>
+          <img src="./IMG20250814142746.jpg" alt="Close-Up"/>
+          <img src="./IMG20250814142754.jpg" alt="Full View"/>
+          <img src="./IMG20250814142801 (1).jpg" alt="Side View"/>
+          <img src="./IMG20250814142801.jpg" alt="With Dupatta"/>
+          <img src="./IMG20250814142819.jpg" alt="Back View"/>
+          <img src="./IMG20250814142856.jpg" alt="Side View"/>
+          <img src="./IMG20250814142856.jpg" alt="With Dupatta"/>
+          <img src="./IMG20250814142932.jpg" alt="Back View"/>
+        </div>
+      </section>
 
       <!-- Right: Product details -->
       <section>
@@ -178,55 +198,54 @@
           <input type="text" placeholder="Enter PIN code" maxlength="6"/>
           <button>Check</button>
         </div>
-      <section class="product-details">
-  <h2>PRODUCT DETAILS</h2>
-  <p>Black, white and red printed kurta with trousers and dupatta</p>
 
-  <h3>Kurta design:</h3>
-  <ul>
-    <li>Floral printed</li>
-    <li>Anarkali shape</li>
-    <li>Empire style</li>
-    <li>Round neck</li>
-    <li>Three-quarter regular sleeves</li>
-    <li>Calf length with flared hem</li>
-    <li>Pure cotton machine weave fabric</li>
-  </ul>
+        <section class="product-details">
+          <h2>PRODUCT DETAILS</h2>
+          <p>Black, white and red printed kurta with trousers and dupatta</p>
 
-  <h3>Trousers design:</h3>
-  <ul>
-    <li>Embroidered Trousers</li>
-    <li>Elasticated waistband</li>
-  </ul>
+          <h3>Kurta design:</h3>
+          <ul>
+            <li>Floral printed</li>
+            <li>Anarkali shape</li>
+            <li>Empire style</li>
+            <li>Round neck</li>
+            <li>Three-quarter regular sleeves</li>
+            <li>Calf length with flared hem</li>
+            <li>Pure cotton machine weave fabric</li>
+          </ul>
 
-  <h3>Dupatta design:</h3>
-  <ul>
-    <li>Printed dupatta</li>
-  </ul>
+          <h3>Trousers design:</h3>
+          <ul>
+            <li>Embroidered Trousers</li>
+            <li>Elasticated waistband</li>
+          </ul>
 
-  <h3>Size & Fit</h3>
-  <p>The model (height 5'8") is wearing a size S</p>
+          <h3>Dupatta design:</h3>
+          <ul>
+            <li>Printed dupatta</li>
+          </ul>
 
-  <h3>Material & Care</h3>
-  <ul>
-    <li>Pure Cotton</li>
-    <li>Machine Wash</li>
-  </ul>
+          <h3>Size & Fit</h3>
+          <p>The model (height 5'8") is wearing a size S</p>
 
-  <h3>Specifications</h3>
-  <div class="spec-grid">
-    <div><strong>Sleeve Length</strong><br>Three-Quarter Sleeves</div>
-    <div><strong>Top Shape</strong><br>Anarkali</div>
-    <div><strong>Top Type</strong><br>Kurta</div>
-    <div><strong>Bottom Type</strong><br>Trousers</div>
-    <div><strong>Dupatta</strong><br>Without Dupatta</div>
-    <div><strong>Neck</strong><br>Collar</div>
-    <div><strong>Number of Items</strong><br>1</div>
-    <div><strong>Package Contains</strong><br>Only Shirt</div>
-    
-    
-  </div>
-</section>
+          <h3>Material & Care</h3>
+          <ul>
+            <li>Pure Cotton</li>
+            <li>Machine Wash</li>
+          </ul>
+
+          <h3>Specifications</h3>
+          <div class="spec-grid">
+            <div><strong>Sleeve Length</strong><br>Three-Quarter Sleeves</div>
+            <div><strong>Top Shape</strong><br>Anarkali</div>
+            <div><strong>Top Type</strong><br>Kurta</div>
+            <div><strong>Bottom Type</strong><br>Trousers</div>
+            <div><strong>Dupatta</strong><br>Without Dupatta</div>
+            <div><strong>Neck</strong><br>Collar</div>
+            <div><strong>Number of Items</strong><br>1</div>
+            <div><strong>Package Contains</strong><br>Only Shirt</div>
+          </div>
+        </section>
 
         <p style="font-size: 13px; color: var(--muted); margin-top: 12px;">
           Sold by: Demo Retail Pvt. Ltd. • 15-days return policy
